@@ -23,7 +23,7 @@ namespace Seasons
                 case short n when(n == 12 || n == 1 || n == 2 ):
                     return "Winter";
                 default:
-                    return "There is no such a season!";
+                    return "There is no such a season";
             }
         
 

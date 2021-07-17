@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\meruzha\\source\\repos\\projects\\Seasons_Copy\\Seasons\\Seasons.csproj": {}
+    "C:\\Users\\meruzha\\Desktop\\projects\\seasons\\Seasons\\Seasons.csproj": {}
   },
   "projects": {
-    "C:\\Users\\meruzha\\source\\repos\\projects\\Seasons_Copy\\Seasons\\Seasons.csproj": {
+    "C:\\Users\\meruzha\\Desktop\\projects\\seasons\\Seasons\\Seasons.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\meruzha\\source\\repos\\projects\\Seasons_Copy\\Seasons\\Seasons.csproj",
+        "projectUniqueName": "C:\\Users\\meruzha\\Desktop\\projects\\seasons\\Seasons\\Seasons.csproj",
         "projectName": "Seasons",
-        "projectPath": "C:\\Users\\meruzha\\source\\repos\\projects\\Seasons_Copy\\Seasons\\Seasons.csproj",
+        "projectPath": "C:\\Users\\meruzha\\Desktop\\projects\\seasons\\Seasons\\Seasons.csproj",
         "packagesPath": "C:\\Users\\meruzha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\meruzha\\source\\repos\\projects\\Seasons_Copy\\Seasons\\obj\\",
+        "outputPath": "C:\\Users\\meruzha\\Desktop\\projects\\seasons\\Seasons\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
