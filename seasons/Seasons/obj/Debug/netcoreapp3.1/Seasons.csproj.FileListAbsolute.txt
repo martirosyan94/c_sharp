@@ -24,3 +24,16 @@ C:\Users\meruzha\source\repos\projects\Seasons\Seasons\obj\Debug\netcoreapp3.1\S
 C:\Users\meruzha\source\repos\projects\Seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.dll
 C:\Users\meruzha\source\repos\projects\Seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.pdb
 C:\Users\meruzha\source\repos\projects\Seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.genruntimeconfig.cache
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\bin\Debug\netcoreapp3.1\Seasons.exe
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\bin\Debug\netcoreapp3.1\Seasons.deps.json
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\bin\Debug\netcoreapp3.1\Seasons.runtimeconfig.json
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\bin\Debug\netcoreapp3.1\Seasons.runtimeconfig.dev.json
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\bin\Debug\netcoreapp3.1\Seasons.dll
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\bin\Debug\netcoreapp3.1\Seasons.pdb
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.csprojAssemblyReference.cache
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.AssemblyInfoInputs.cache
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.AssemblyInfo.cs
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.csproj.CoreCompileInputs.cache
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.dll
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.pdb
+C:\Users\meruzha\Desktop\projects\seasons\Seasons\obj\Debug\netcoreapp3.1\Seasons.genruntimeconfig.cache

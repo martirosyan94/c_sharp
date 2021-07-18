@@ -6,8 +6,16 @@ namespace Seasons
     {
         static void Main(string[] args)
         {
-            short monthNumber = short.Parse(Console.ReadLine());
-            Console.WriteLine(GetSeason(monthNumber));
+            //short monthNumber = short.Parse(Console.ReadLine());
+            //Console.WriteLine(GetSeason(monthNumber));
+
+            Student stud = new Student();
+            stud.Name = "Ashot";
+            stud.Surname = "Martirosyan";
+            stud.Ratings = new double[] { 99, 65, 42, 55, 73};
+            double result = 0;
+            stud.AverageRatings(ref result);
+            Console.WriteLine(result);
         }
 
         static String GetSeason(short month)
