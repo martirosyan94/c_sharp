@@ -6,22 +6,20 @@ namespace Seasons
 {
     class Student
     {
-        private string name;
-        private string surname;
-        private double[] ratings;
 
-        public string Name { get => name; set => name = value; }
-        public string Surname { get => surname; set => surname = value; }
-        public double[] Ratings { get => ratings; set => ratings = value; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+
+        public double[] Ratings { get; set; }
 
         // This function is used to test ref usage
         public void AverageRatings(ref double result)
         {
             double sum = 0;
-            for (int i = 0; i < ratings.Length; i++)
-                sum += ratings[i];
+            for (int i = 0; i < Ratings.Length; i++)
+                sum += Ratings[i];
 
-            result = sum / ratings.Length;
+            result = sum / Ratings.Length;
         }
 
     }

@@ -16,6 +16,10 @@ namespace Seasons
             double result = 0;
             stud.AverageRatings(ref result);
             Console.WriteLine(result);
+
+            int i = 5;
+            UpdateValue(ref i);
+            Console.WriteLine(i);
         }
 
         static String GetSeason(short month)
@@ -36,5 +40,7 @@ namespace Seasons
         
 
         }
+
+        static void UpdateValue(ref int i) => i += 1;
     }
 }
