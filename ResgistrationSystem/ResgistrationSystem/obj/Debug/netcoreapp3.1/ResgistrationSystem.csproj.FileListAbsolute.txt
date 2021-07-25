@@ -1,0 +1,13 @@
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\bin\Debug\netcoreapp3.1\ResgistrationSystem.exe
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\bin\Debug\netcoreapp3.1\ResgistrationSystem.deps.json
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\bin\Debug\netcoreapp3.1\ResgistrationSystem.runtimeconfig.json
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\bin\Debug\netcoreapp3.1\ResgistrationSystem.runtimeconfig.dev.json
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\bin\Debug\netcoreapp3.1\ResgistrationSystem.dll
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\bin\Debug\netcoreapp3.1\ResgistrationSystem.pdb
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\obj\Debug\netcoreapp3.1\ResgistrationSystem.csprojAssemblyReference.cache
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\obj\Debug\netcoreapp3.1\ResgistrationSystem.AssemblyInfoInputs.cache
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\obj\Debug\netcoreapp3.1\ResgistrationSystem.AssemblyInfo.cs
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\obj\Debug\netcoreapp3.1\ResgistrationSystem.csproj.CoreCompileInputs.cache
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\obj\Debug\netcoreapp3.1\ResgistrationSystem.dll
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\obj\Debug\netcoreapp3.1\ResgistrationSystem.pdb
+C:\Users\meruzha\Desktop\projects\ResgistrationSystem\ResgistrationSystem\obj\Debug\netcoreapp3.1\ResgistrationSystem.genruntimeconfig.cache
