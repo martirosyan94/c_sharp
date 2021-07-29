@@ -12,13 +12,15 @@ namespace SocialNetwork
     {
         public static List<User> Users { get; set; } = new();
         private int command;
-        private string fileName = "account_info.json";
+        private readonly string fileName = "account_info.json";
         public User CurrentUser { get; private set; }
         public bool IsLogined { get; private set; } = false;
         public UserMenegment()
         {
             if (!File.Exists(fileName))
+            {
                 File.Create(fileName);
+            }
 
         }
         public void RegisterUser()
@@ -59,6 +61,7 @@ namespace SocialNetwork
             }    
                
             // Todo firstordefault first single singleordefault (read, define best one)
+            // Todo pass function
  /*           CurrentUser = Users.FirstOrDefault(e => e.Email == userName && e.Password == password);
             if (CurrentUser is not null)
             {
