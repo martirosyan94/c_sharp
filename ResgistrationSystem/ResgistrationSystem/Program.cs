@@ -9,8 +9,8 @@ namespace SocialNetwork
 
         static void Main(string[] args)
         {
-            Factory factory = new();
-            factory.Start();
+            MainMenu mainMenu = new();
+            mainMenu.Start();
         }        
     }
 }

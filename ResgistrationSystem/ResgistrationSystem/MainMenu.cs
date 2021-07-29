@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork
 {
-    class Factory
+    class MainMenu
     {
         private bool stop = false;
         private int command;
-        private List<User> users = new();
+        private UserMenegment userMenegment;
         public void Start()
         {
             while (!stop)
@@ -22,6 +22,7 @@ namespace SocialNetwork
                               "\n2 - Registration " +
                               "\n3 - Exit");
             command = int.Parse(Console.ReadLine());
+            userMenegment = new();
             switch (command)
             {
                 case 1:
@@ -38,17 +39,16 @@ namespace SocialNetwork
 
         private void SignIn()
         {
-            Login login = new();
-            while (!login.IsLogined) 
+            while (!userMenegment.IsLogined) 
             {
-                login.LoginToSystem(users);
+                userMenegment.LoginToSystem();
             }
-            while (login.ShowUserOptions(login.CurrentUser, ref stop)) { }
+            while (userMenegment.ShowUserOptions(userMenegment.CurrentUser, ref stop)) { }
         }
 
         private void Register()
         {
-            users.Add(Registration.RegisterUser());
+            userMenegment.RegisterUser();
             Console.WriteLine("Registration sucsessfully completed");
         }
     }
