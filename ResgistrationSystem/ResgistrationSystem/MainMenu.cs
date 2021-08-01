@@ -48,8 +48,31 @@ namespace SocialNetwork
 
         private void Register()
         {
-            userMenegment.RegisterUser();
-            Console.WriteLine("Registration sucsessfully completed");
+            Console.WriteLine("1 - User " +
+                  "\n2 - Employee " +
+                  "\n3 - Student" +
+                  "\n4 - Back" + 
+                  "\n5 - exit");
+            command = int.Parse(Console.ReadLine());
+            userMenegment = new();
+            switch (command)
+            {
+                case 1:
+                    userMenegment.RegisterUser(1);
+                    Console.WriteLine("Registration sucsessfully completed");
+                    break;
+                case 2:
+                    userMenegment.RegisterUser(2);
+                    Console.WriteLine("Registration sucsessfully completed");
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    stop = true;
+                    break;
+            }
         }
     }
 }

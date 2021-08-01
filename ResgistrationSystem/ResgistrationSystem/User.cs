@@ -21,7 +21,7 @@ namespace SocialNetwork
             Password = password;
         }
 
-        public void AccountInfo() 
+        public virtual void AccountInfo() 
         {
             Console.WriteLine(Name + " " + Surname);
         }

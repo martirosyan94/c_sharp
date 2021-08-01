@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SocialNetwork
@@ -23,7 +24,13 @@ namespace SocialNetwork
             }
 
         }
-        public void RegisterUser()
+
+        /// <summary>
+        /// Gets type of user.
+        /// 1 - User, 2 - Employee, 3 - Student
+        /// </summary>
+        /// <param name="type"></param>
+        public void RegisterUser(short type)
         {
             Console.WriteLine("userName");
             string name = Console.ReadLine();
@@ -36,11 +43,22 @@ namespace SocialNetwork
             Console.WriteLine("passwrod");
             string password = Console.ReadLine();
 
-            string userInfo = JsonSerializer.Serialize(new User(name, surName, age, email, password));
             StreamWriter sw = File.AppendText(fileName);
-            sw.WriteLine(userInfo);
+            string userInfo;
+            switch (type)
+            {
+                case 1:
+                    userInfo = JsonSerializer.Serialize(new User(name, surName, age, email, password));
+                    sw.WriteLine(userInfo);
+                    break;
+                case 2:
+                    Console.WriteLine("workplace ");
+                    string workplace = Console.ReadLine();
+                    userInfo = JsonSerializer.Serialize(new Employee(name, surName, age, email, password, workplace));
+                    sw.WriteLine(userInfo);
+                    break;
+            }
             sw.Close();
-
         }
 
         public void LoginToSystem()
@@ -51,7 +69,16 @@ namespace SocialNetwork
             var allUsers = File.ReadAllLines(fileName);
             for (int i = 0; i < allUsers.Length; i++)
             {
-                CurrentUser = JsonSerializer.Deserialize<User>(allUsers[i]);
+                switch (allUsers[i])
+                { 
+                    case string _ when Regex.IsMatch(allUsers[i], "Workplace"):
+                        CurrentUser = JsonSerializer.Deserialize<Employee>(allUsers[i]);
+                        break;
+                    default:
+                        CurrentUser = JsonSerializer.Deserialize<User>(allUsers[i]);
+                        break;
+                }
+                
                 if (CurrentUser.Email == userName && CurrentUser.Password == password)
                 {
                     Console.WriteLine("You have successfully logged in");
