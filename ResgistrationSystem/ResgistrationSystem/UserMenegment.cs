@@ -32,7 +32,7 @@ namespace SocialNetwork
         /// <param name="type"></param>
         public void RegisterUser(short type)
         {
-            Console.WriteLine("Email");
+            Console.WriteLine("UserName");
             string name = Console.ReadLine();
             Console.WriteLine("surname");
             string surName = Console.ReadLine();
