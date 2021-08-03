@@ -6,6 +6,20 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork
 {
+    enum MainMenuOptions
+    {
+        Login = 1,
+        Register,
+        Exit
+    }
+    enum RegisterOptions
+    { 
+        User = 1,
+        Employee,
+        Student,
+        Back,
+        Exit
+    }
     class MainMenu
     {
         private bool stop = false;
@@ -18,20 +32,21 @@ namespace SocialNetwork
         }
         private void ShowMainOptions()
         {
-            Console.WriteLine("1 - Login " +
-                              "\n2 - Registration " +
-                              "\n3 - Exit");
+            Console.WriteLine(@$"{(int)MainMenuOptions.Login} -  {MainMenuOptions.Login}
+            {Environment.NewLine}{(int)MainMenuOptions.Register} - {MainMenuOptions.Register}
+            { Environment.NewLine}{(int)MainMenuOptions.Exit} - {MainMenuOptions.Exit}");
+
             command = int.Parse(Console.ReadLine());
             userMenegment = new();
-            switch (command)
+            switch ((MainMenuOptions)command)
             {
-                case 1:
+                case MainMenuOptions.Login:
                     SignIn();
                     break;
-                case 2:
+                case MainMenuOptions.Register:
                     Register();
                     break;
-                case 3:
+                case MainMenuOptions.Exit:
                     stop = true;
                     break;
             }
@@ -48,28 +63,29 @@ namespace SocialNetwork
 
         private void Register()
         {
-            Console.WriteLine("1 - User " +
-                  "\n2 - Employee " +
-                  "\n3 - Student" +
-                  "\n4 - Back" + 
-                  "\n5 - exit");
+            Console.WriteLine($@"{(int)RegisterOptions.User} - {RegisterOptions.User}
+            {Environment.NewLine}{(int)RegisterOptions.Employee} - {RegisterOptions.Employee}
+            {Environment.NewLine}{(int)RegisterOptions.Student} - {RegisterOptions.Student}
+            {Environment.NewLine}{(int)RegisterOptions.Back} - {RegisterOptions.User}
+            {Environment.NewLine}{(int)RegisterOptions.Exit} - {RegisterOptions.Exit}");
+
             command = int.Parse(Console.ReadLine());
             userMenegment = new();
-            switch (command)
+            switch ((RegisterOptions)command)
             {
-                case 1:
-                    userMenegment.RegisterUser(1);
+                case RegisterOptions.User:
+                    userMenegment.RegisterUser(AccountType.User);
                     Console.WriteLine("Registration sucsessfully completed");
                     break;
-                case 2:
-                    userMenegment.RegisterUser(2);
+                case RegisterOptions.Employee:
+                    userMenegment.RegisterUser(AccountType.Employee);
                     Console.WriteLine("Registration sucsessfully completed");
                     break;
-                case 3:
+                case RegisterOptions.Student:
                     break;
-                case 4:
+                case RegisterOptions.Back:
                     break;
-                case 5:
+                case RegisterOptions.Exit:
                     stop = true;
                     break;
             }

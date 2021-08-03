@@ -9,6 +9,18 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork
 {
+    enum UserOptions
+    { 
+        AccountInfo = 1,
+        Back,
+        Exit
+    }
+    enum AccountType
+    {
+        User,
+        Employee,
+        Student
+    }
     class UserMenegment
     {
         public static List<User> Users { get; set; } = new();
@@ -30,7 +42,7 @@ namespace SocialNetwork
         /// 1 - User, 2 - Employee, 3 - Student
         /// </summary>
         /// <param name="type"></param>
-        public void RegisterUser(short type)
+        public void RegisterUser(AccountType accountType)
         {
             Console.WriteLine("UserName");
             string name = Console.ReadLine();
@@ -43,22 +55,26 @@ namespace SocialNetwork
             Console.WriteLine("passwrod");
             string password = Console.ReadLine();
 
-            StreamWriter sw = File.AppendText(fileName);
-            string userInfo;
-            switch (type)
+            //StreamWriter sw = File.AppendText(fileName);
+            using (StreamWriter sw = new(fileName, append : true))
             {
-                case 1:
-                    userInfo = JsonSerializer.Serialize(new User(name, surName, age, email, password));
-                    sw.WriteLine(userInfo);
-                    break;
-                case 2:
-                    Console.WriteLine("workplace ");
-                    string workplace = Console.ReadLine();
-                    userInfo = JsonSerializer.Serialize(new Employee(name, surName, age, email, password, workplace));
-                    sw.WriteLine(userInfo);
-                    break;
+                string userInfo;
+                switch (accountType)
+                {
+                    case AccountType.User:
+                        userInfo = JsonSerializer.Serialize(new AccountModel(AccountType.User,
+                                   JsonSerializer.Serialize(new User(name, surName, age, email, password))));
+                        sw.WriteLine(userInfo);
+                        break;
+                    case AccountType.Employee:
+                        Console.WriteLine("workplace ");
+                        string workplace = Console.ReadLine();
+                        userInfo = JsonSerializer.Serialize(new AccountModel(AccountType.Employee,
+                                   JsonSerializer.Serialize(new Employee(name, surName, age, email, password, workplace))));
+                        sw.WriteLine(userInfo);
+                        break;
+                }
             }
-            sw.Close();
         }
 
         public void LoginToSystem()
@@ -67,15 +83,17 @@ namespace SocialNetwork
             string userName = Console.ReadLine();
             string password = Console.ReadLine();
             var allUsers = File.ReadAllLines(fileName);
+            AccountModel accountModel;
             for (int i = 0; i < allUsers.Length; i++)
             {
-                switch (allUsers[i])
+                accountModel = JsonSerializer.Deserialize<AccountModel>(allUsers[i]);
+                switch (accountModel.Type)
                 { 
-                    case string _ when Regex.IsMatch(allUsers[i], "Workplace"):
-                        CurrentUser = JsonSerializer.Deserialize<Employee>(allUsers[i]);
+                    case AccountType.User:
+                        CurrentUser = JsonSerializer.Deserialize<User>(accountModel.Model);
                         break;
-                    default:
-                        CurrentUser = JsonSerializer.Deserialize<User>(allUsers[i]);
+                    case AccountType.Employee:
+                        CurrentUser = JsonSerializer.Deserialize<Employee>(accountModel.Model);
                         break;
                 }
                 
@@ -102,18 +120,19 @@ namespace SocialNetwork
 
         public bool ShowUserOptions(User user, ref bool stop)
         {
-            Console.WriteLine("1 - Account info " +
-                              "\n2 - Back " +
-                              "\n3 - Exit");
+            Console.WriteLine($@"{(int)UserOptions.AccountInfo} - Account Info
+            {Environment.NewLine}{(int)UserOptions.Back} - {UserOptions.Back}
+            {Environment.NewLine}{(int)UserOptions.Exit} - {UserOptions.Exit}");
+
             command = int.Parse(Console.ReadLine());
-            switch (command)
+            switch ((UserOptions)command)
             {
-                case 1:
+                case UserOptions.AccountInfo:
                     user.AccountInfo();
                     return true;
-                case 2:
+                case UserOptions.Back:
                     return false;
-                case 3:
+                case UserOptions.Exit:
                     stop = true;
                     return false;
                 default:
