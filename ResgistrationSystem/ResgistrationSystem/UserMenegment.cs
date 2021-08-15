@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,30 +10,20 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork
 {
-    enum UserOptions
-    { 
-        AccountInfo = 1,
-        Back,
-        Exit
-    }
-    enum AccountType
-    {
-        User,
-        Employee,
-        Student
-    }
     class UserMenegment
     {
         public static List<User> Users { get; set; } = new();
         private int command;
-        private readonly string fileName = "account_info.json";
+        private static readonly IConfiguration _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+        private string _fileName = string.Empty;
         public User CurrentUser { get; private set; }
         public bool IsLogined { get; private set; } = false;
         public UserMenegment()
         {
-            if (!File.Exists(fileName))
+            _fileName = _configuration.GetSection("FileName:accountInfo").Value;
+            if (!File.Exists(_fileName))
             {
-                File.Create(fileName);
+                File.Create(_fileName);
             }
 
         }
@@ -55,8 +46,7 @@ namespace SocialNetwork
             Console.WriteLine("passwrod");
             string password = Console.ReadLine();
 
-            //StreamWriter sw = File.AppendText(fileName);
-            using (StreamWriter sw = new(fileName, append : true))
+            using (StreamWriter sw = new(_fileName, append : true))
             {
                 string userInfo;
                 switch (accountType)
@@ -82,7 +72,7 @@ namespace SocialNetwork
             Console.WriteLine("Enter your username and password");
             string userName = Console.ReadLine();
             string password = Console.ReadLine();
-            var allUsers = File.ReadAllLines(fileName);
+            var allUsers = File.ReadAllLines(_fileName);
             AccountModel accountModel;
             for (int i = 0; i < allUsers.Length; i++)
             {
@@ -120,11 +110,11 @@ namespace SocialNetwork
 
         public bool ShowUserOptions(User user, ref bool stop)
         {
-            Console.WriteLine($@"{(int)UserOptions.AccountInfo} - Account Info
-            {Environment.NewLine}{(int)UserOptions.Back} - {UserOptions.Back}
-            {Environment.NewLine}{(int)UserOptions.Exit} - {UserOptions.Exit}");
+            Console.WriteLine($@"{Math.Log((int)UserOptions.AccountInfo,2)} - Account Info
+            {Environment.NewLine}{Math.Log((int)UserOptions.Back, 2)} - {UserOptions.Back}
+            {Environment.NewLine}{Math.Log((int)UserOptions.Exit, 2)} - {UserOptions.Exit}");
 
-            command = int.Parse(Console.ReadLine());
+            command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
             switch ((UserOptions)command)
             {
                 case UserOptions.AccountInfo:

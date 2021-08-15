@@ -6,20 +6,6 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork
 {
-    enum MainMenuOptions
-    {
-        Login = 1,
-        Register,
-        Exit
-    }
-    enum RegisterOptions
-    { 
-        User = 1,
-        Employee,
-        Student,
-        Back,
-        Exit
-    }
     class MainMenu
     {
         private bool stop = false;
@@ -32,11 +18,11 @@ namespace SocialNetwork
         }
         private void ShowMainOptions()
         {
-            Console.WriteLine(@$"{(int)MainMenuOptions.Login} -  {MainMenuOptions.Login}
-            {Environment.NewLine}{(int)MainMenuOptions.Register} - {MainMenuOptions.Register}
-            { Environment.NewLine}{(int)MainMenuOptions.Exit} - {MainMenuOptions.Exit}");
+            Console.WriteLine(@$"{Math.Log((int)MainMenuOptions.Login, 2)} -  {MainMenuOptions.Login}
+            {Environment.NewLine}{Math.Log((int)MainMenuOptions.Register, 2)} - {MainMenuOptions.Register}
+            { Environment.NewLine}{Math.Log((int)MainMenuOptions.Exit, 2)} - {MainMenuOptions.Exit}");
 
-            command = int.Parse(Console.ReadLine());
+            command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
             userMenegment = new();
             switch ((MainMenuOptions)command)
             {
@@ -63,13 +49,13 @@ namespace SocialNetwork
 
         private void Register()
         {
-            Console.WriteLine($@"{(int)RegisterOptions.User} - {RegisterOptions.User}
-            {Environment.NewLine}{(int)RegisterOptions.Employee} - {RegisterOptions.Employee}
-            {Environment.NewLine}{(int)RegisterOptions.Student} - {RegisterOptions.Student}
-            {Environment.NewLine}{(int)RegisterOptions.Back} - {RegisterOptions.User}
-            {Environment.NewLine}{(int)RegisterOptions.Exit} - {RegisterOptions.Exit}");
+            Console.WriteLine($@"{Math.Log((int)RegisterOptions.User,2)} - {RegisterOptions.User}
+            {Environment.NewLine}{Math.Log((int)RegisterOptions.Employee, 2)} - {RegisterOptions.Employee}
+            {Environment.NewLine}{Math.Log((int)RegisterOptions.Student, 2)} - {RegisterOptions.Student}
+            {Environment.NewLine}{Math.Log((int)RegisterOptions.Back, 2)} - {RegisterOptions.User}
+            {Environment.NewLine}{Math.Log((int)RegisterOptions.Exit, 2)} - {RegisterOptions.Exit}");
 
-            command = int.Parse(Console.ReadLine());
+            command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
             userMenegment = new();
             switch ((RegisterOptions)command)
             {
