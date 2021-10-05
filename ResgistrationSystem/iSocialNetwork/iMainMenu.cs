@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialNetwork
+namespace SocialNetwork.Base
 {
-enum AccountType
-{
-    User,
-    Employee,
-    Student
-}
+    public interface iMainMenu
+    {
+        void SignIn();
+        void Register();
+    }
 }

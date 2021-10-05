@@ -9,7 +9,7 @@ namespace SocialNetwork
 
         static void Main(string[] args)
         {
-            MainMenu mainMenu = new();
+            var mainMenu = new MainMenu();
             mainMenu.Start();
         }        
     }
