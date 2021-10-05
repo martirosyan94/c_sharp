@@ -1,0 +1,16 @@
+﻿<Window x:Class="RegistrationSystemWPF.SignInWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegistrationSystemWPF"
+        mc:Ignorable="d"
+        Title="SignInWindow" Height="450" Width="800"
+        >
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBox Width="100" Text="Email" Name="txtBoxEmail"></TextBox>
+        <TextBox Width="100" Margin="10"  Name="txtBoxPassword">Password</TextBox>
+        <Button  Width="100" Margin="10" Click="SignInClick">Sign In</Button>
+           
+    </StackPanel>
+</Window>

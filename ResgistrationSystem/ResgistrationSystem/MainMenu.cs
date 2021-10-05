@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SocialNetwork.Core;
+using System;
 
 namespace SocialNetwork
 {
-    class MainMenu
+    class MainMenu : IMainMenu
     {
         private bool stop = false;
         private int command;
         private UserMenegment userMenegment;
+        private RegisterModel registerModel;
         public void Start()
         {
             while (!stop)
@@ -38,18 +36,24 @@ namespace SocialNetwork
             }
         }
 
-        private void SignIn()
+        public void SignIn()
         {
-            while (!userMenegment.IsLogined) 
+            while (!userMenegment.IsLogined)
             {
-                userMenegment.LoginToSystem();
+                registerModel = new RegisterModel();
+                Console.WriteLine("Enter your username and password");
+                registerModel.Email = Console.ReadLine();
+                registerModel.Password = Console.ReadLine();
+                userMenegment.LoginToSystem(registerModel);
             }
-            while (userMenegment.ShowUserOptions(userMenegment.CurrentUser, ref stop)) { }
+            while (ShowUserOptions(userMenegment.CurrentUser, ref stop)) { }
         }
 
-        private void Register()
+        public void Register()
         {
-            Console.WriteLine($@"{Math.Log((int)RegisterOptions.User,2)} - {RegisterOptions.User}
+            registerModel = new RegisterModel();
+
+            Console.WriteLine($@"{Math.Log((int)RegisterOptions.User, 2)} - {RegisterOptions.User}
             {Environment.NewLine}{Math.Log((int)RegisterOptions.Employee, 2)} - {RegisterOptions.Employee}
             {Environment.NewLine}{Math.Log((int)RegisterOptions.Student, 2)} - {RegisterOptions.Student}
             {Environment.NewLine}{Math.Log((int)RegisterOptions.Back, 2)} - {RegisterOptions.User}
@@ -57,14 +61,17 @@ namespace SocialNetwork
 
             command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
             userMenegment = new();
+            RegisterInput();
             switch ((RegisterOptions)command)
             {
                 case RegisterOptions.User:
-                    userMenegment.RegisterUser(AccountType.User);
+                    registerModel.Type = AccountType.User;
+                    userMenegment.RegisterUser(registerModel);
                     Console.WriteLine("Registration sucsessfully completed");
                     break;
                 case RegisterOptions.Employee:
-                    userMenegment.RegisterUser(AccountType.Employee);
+                    registerModel.Type = AccountType.Employee;
+                    userMenegment.RegisterUser(registerModel);
                     Console.WriteLine("Registration sucsessfully completed");
                     break;
                 case RegisterOptions.Student:
@@ -74,6 +81,42 @@ namespace SocialNetwork
                 case RegisterOptions.Exit:
                     stop = true;
                     break;
+            }
+
+        }      
+        public void RegisterInput()
+        {
+            Console.WriteLine("Name");
+            registerModel.Name = Console.ReadLine();
+            Console.WriteLine("surname");
+            registerModel.Surname = Console.ReadLine();
+            Console.WriteLine("age");
+            registerModel.Age = int.Parse(Console.ReadLine());
+            Console.WriteLine("email");
+            registerModel.Email = Console.ReadLine();
+            Console.WriteLine("passwrod");
+            registerModel.Password = Console.ReadLine();
+        }
+
+        public bool ShowUserOptions(User user, ref bool stop)
+        {
+            Console.WriteLine($@"{Math.Log((int)UserOptions.AccountInfo, 2)} - Account Info
+            {Environment.NewLine}{Math.Log((int)UserOptions.Back, 2)} - {UserOptions.Back}
+            {Environment.NewLine}{Math.Log((int)UserOptions.Exit, 2)} - {UserOptions.Exit}");
+
+            command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
+            switch ((UserOptions)command)
+            {
+                case UserOptions.AccountInfo:
+                    user.AccountInfo();
+                    return true;
+                case UserOptions.Back:
+                    return false;
+                case UserOptions.Exit:
+                    stop = true;
+                    return false;
+                default:
+                    return true;
             }
         }
     }

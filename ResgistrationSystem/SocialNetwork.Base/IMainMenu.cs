@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialNetwork
+namespace SocialNetwork.Core
 {
-enum MainMenuOptions
-{
-    Login = 2,
-    Register = 4,
-    Exit = 8
-}
+   public interface IMainMenu
+    {
+        void SignIn();
+        void Register();
+    }
 }

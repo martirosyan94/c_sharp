@@ -7,10 +7,11 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using SocialNetwork.Core;
 
-namespace SocialNetwork
+namespace SocialNetwork.Core
 {
-    class UserMenegment
+    public class UserMenegment
     {
         public static List<User> Users { get; set; } = new();
         private int command;
@@ -33,52 +34,38 @@ namespace SocialNetwork
         /// 1 - User, 2 - Employee, 3 - Student
         /// </summary>
         /// <param name="type"></param>
-        public void RegisterUser(AccountType accountType)
+        public void RegisterUser(RegisterModel registerModel)
         {
-            Console.WriteLine("UserName");
-            string name = Console.ReadLine();
-            Console.WriteLine("surname");
-            string surName = Console.ReadLine();
-            Console.WriteLine("age");
-            int age = int.Parse(Console.ReadLine());
-            Console.WriteLine("email");
-            string email = Console.ReadLine();
-            Console.WriteLine("passwrod");
-            string password = Console.ReadLine();
-
-            using (StreamWriter sw = new(_fileName, append : true))
+            using (StreamWriter sw = new(_fileName, append: true))
             {
                 string userInfo;
-                switch (accountType)
+                switch (registerModel.Type)
                 {
                     case AccountType.User:
                         userInfo = JsonSerializer.Serialize(new AccountModel(AccountType.User,
-                                   JsonSerializer.Serialize(new User(name, surName, age, email, password))));
+                                   JsonSerializer.Serialize(new User(registerModel.Name, registerModel.Surname, registerModel.Age, registerModel.Email, registerModel.Password))));
                         sw.WriteLine(userInfo);
                         break;
                     case AccountType.Employee:
                         Console.WriteLine("workplace ");
                         string workplace = Console.ReadLine();
                         userInfo = JsonSerializer.Serialize(new AccountModel(AccountType.Employee,
-                                   JsonSerializer.Serialize(new Employee(name, surName, age, email, password, workplace))));
+                                   JsonSerializer.Serialize(new Employee(registerModel.Name, registerModel.Surname, registerModel.Age, registerModel.Email, registerModel.Password, workplace))));
                         sw.WriteLine(userInfo);
                         break;
                 }
             }
         }
 
-        public void LoginToSystem()
+        public void LoginToSystem(RegisterModel registerModel)
         {
-            Console.WriteLine("Enter your username and password");
-            string userName = Console.ReadLine();
-            string password = Console.ReadLine();
             var allUsers = File.ReadAllLines(_fileName);
             AccountModel accountModel;
             for (int i = 0; i < allUsers.Length; i++)
             {
                 accountModel = JsonSerializer.Deserialize<AccountModel>(allUsers[i]);
                 switch (accountModel.Type)
-                { 
+                {
                     case AccountType.User:
                         CurrentUser = JsonSerializer.Deserialize<User>(accountModel.Model);
                         break;
@@ -86,48 +73,26 @@ namespace SocialNetwork
                         CurrentUser = JsonSerializer.Deserialize<Employee>(accountModel.Model);
                         break;
                 }
-                
-                if (CurrentUser.Email == userName && CurrentUser.Password == password)
+
+                if (CurrentUser.Email == registerModel.Email && CurrentUser.Password == registerModel.Password)
                 {
                     Console.WriteLine("You have successfully logged in");
                     IsLogined = true;
                     return;
                 }
-            }    
-               
+            }
+
             // Todo firstordefault first single singleordefault (read, define best one)
             // Todo pass function
- /*           CurrentUser = Users.FirstOrDefault(e => e.Email == userName && e.Password == password);
-            if (CurrentUser is not null)
-            {
-                Console.WriteLine("You have successfully logged in");
-                IsLogined = true;
-                return;
-            } */
+            /*           CurrentUser = Users.FirstOrDefault(e => e.Email == userName && e.Password == password);
+                       if (CurrentUser is not null)
+                       {
+                           Console.WriteLine("You have successfully logged in");
+                           IsLogined = true;
+                           return;
+                       } */
 
             Console.WriteLine("The username or password is not correct, try again");
-        }
-
-        public bool ShowUserOptions(User user, ref bool stop)
-        {
-            Console.WriteLine($@"{Math.Log((int)UserOptions.AccountInfo,2)} - Account Info
-            {Environment.NewLine}{Math.Log((int)UserOptions.Back, 2)} - {UserOptions.Back}
-            {Environment.NewLine}{Math.Log((int)UserOptions.Exit, 2)} - {UserOptions.Exit}");
-
-            command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
-            switch ((UserOptions)command)
-            {
-                case UserOptions.AccountInfo:
-                    user.AccountInfo();
-                    return true;
-                case UserOptions.Back:
-                    return false;
-                case UserOptions.Exit:
-                    stop = true;
-                    return false;
-                default:
-                    return true;
-            }
         }
 
     }
