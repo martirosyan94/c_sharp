@@ -22,7 +22,8 @@ namespace SocialNetwork
             { Environment.NewLine}{Math.Log((int)MainMenuOptions.Exit, 2)} - {MainMenuOptions.Exit}");
 
             command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
-            var userMenegment = new UserMenegment();
+            userMenegment = new UserMenegment();
+            logWriter = new LogWriter();
             userMenegment.LoggedIn += logWriter.OnLoggedIn;
             switch ((MainMenuOptions)command)
             {
