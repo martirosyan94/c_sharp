@@ -95,5 +95,15 @@ namespace SocialNetwork.Core
             Console.WriteLine("The username or password is not correct, try again");
         }
 
+        public event EventHandler<User> LoggedIn;
+        public void WriteToLog(User user)
+        {
+            OnLoggedIn(user);
+        }
+
+        protected virtual void OnLoggedIn(User user)
+        {
+            LoggedIn?.Invoke(this, user);
+        }
     }
 }
