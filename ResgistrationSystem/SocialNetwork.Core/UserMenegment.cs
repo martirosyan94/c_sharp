@@ -110,5 +110,4 @@ namespace SocialNetwork.Core
             LoggedIn?.Invoke(this, new UserEventArgs() { CurrentUser = user} );
         }
     }
-
 }
