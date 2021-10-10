@@ -9,6 +9,7 @@ namespace SocialNetwork
         private int command;
         private UserMenegment userMenegment;
         private RegisterModel registerModel;
+        private LogWriter logWriter;
         public void Start()
         {
             while (!stop)
@@ -21,7 +22,8 @@ namespace SocialNetwork
             { Environment.NewLine}{Math.Log((int)MainMenuOptions.Exit, 2)} - {MainMenuOptions.Exit}");
 
             command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
-            userMenegment = new();
+            var userMenegment = new UserMenegment();
+            userMenegment.LoggedIn += logWriter.OnLoggedIn;
             switch ((MainMenuOptions)command)
             {
                 case MainMenuOptions.Login:
@@ -46,6 +48,8 @@ namespace SocialNetwork
                 registerModel.Password = Console.ReadLine();
                 userMenegment.LoginToSystem(registerModel);
             }
+            userMenegment.WriteToLog(userMenegment.CurrentUser);
+
             while (ShowUserOptions(userMenegment.CurrentUser, ref stop)) { }
         }
 
