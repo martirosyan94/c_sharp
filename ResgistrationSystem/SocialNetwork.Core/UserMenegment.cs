@@ -11,6 +11,10 @@ using SocialNetwork.Core;
 
 namespace SocialNetwork.Core
 {
+    public class UserEventArgs : EventArgs
+    {
+        public User CurrentUser { get; set; }
+    }
     public class UserMenegment
     {
         public static List<User> Users { get; set; } = new();
@@ -95,7 +99,7 @@ namespace SocialNetwork.Core
             Console.WriteLine("The username or password is not correct, try again");
         }
 
-        public event EventHandler<User> LoggedIn;
+        public event EventHandler<UserEventArgs> LoggedIn;
         public void WriteToLog(User user)
         {
             OnLoggedIn(user);
@@ -103,7 +107,8 @@ namespace SocialNetwork.Core
 
         protected virtual void OnLoggedIn(User user)
         {
-            LoggedIn?.Invoke(this, user);
+            LoggedIn?.Invoke(this, new UserEventArgs() { CurrentUser = user} );
         }
     }
+
 }
