@@ -80,8 +80,10 @@ namespace SocialNetwork.Core
 
                 if (CurrentUser.Email == registerModel.Email && CurrentUser.Password == registerModel.Password)
                 {
+                    OnLoggedIn();
                     Console.WriteLine("You have successfully logged in");
                     IsLogined = true;
+                    //OnLoggedIn(CurrentUser);
                     return;
                 }
             }
@@ -99,15 +101,11 @@ namespace SocialNetwork.Core
             Console.WriteLine("The username or password is not correct, try again");
         }
 
-        public event EventHandler<UserEventArgs> LoggedIn;
-        public void WriteToLog(User user)
-        {
-            OnLoggedIn(user);
-        }
+        public event EventHandler LoggedIn;
 
-        protected virtual void OnLoggedIn(User user)
+        protected virtual void OnLoggedIn()
         {
-            LoggedIn?.Invoke(this, new UserEventArgs() { CurrentUser = user} );
+           LoggedIn?.Invoke(this, EventArgs.Empty);
         }
     }
 }

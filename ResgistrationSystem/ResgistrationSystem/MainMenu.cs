@@ -49,7 +49,6 @@ namespace SocialNetwork
                 registerModel.Password = Console.ReadLine();
                 userMenegment.LoginToSystem(registerModel);
             }
-            userMenegment.WriteToLog(userMenegment.CurrentUser);
 
             while (ShowUserOptions(userMenegment.CurrentUser, ref stop)) { }
         }
