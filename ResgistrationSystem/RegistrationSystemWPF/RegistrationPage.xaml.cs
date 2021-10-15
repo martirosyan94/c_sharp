@@ -13,10 +13,15 @@ namespace RegistrationSystemWPF
     {
         private UserMenegment _userMenegment;
         private RegisterModel _registerModel;
+        private LogWriter _logWriter;
         public RegistrationPage()
         {
             InitializeComponent();
             FillAccountTypeComboBox();
+            _userMenegment = new UserMenegment();
+            _registerModel = new RegisterModel();
+            _logWriter = new LogWriter();
+            _userMenegment.RegisteredEmployee += _logWriter.OnRegisteredEmployee;
         }
         private void FillAccountTypeComboBox()
         {
@@ -33,9 +38,6 @@ namespace RegistrationSystemWPF
 
         private void ButtonRegister(object sender, RoutedEventArgs e)
         {
-            _userMenegment = new UserMenegment();
-            _registerModel = new RegisterModel();
-
             _registerModel.Name = txtBoxName.Text;
             _registerModel.Surname = txtBoxSurname.Text;
             _registerModel.Age = int.Parse(txtBoxAge.Text);

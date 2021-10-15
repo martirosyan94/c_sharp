@@ -20,8 +20,9 @@ namespace RegistrationSystemWPF
     /// </summary>
     public partial class SignInWindow : Window
     {
-        private RegisterModel registerModel;
-        private UserMenegment userMenegment;
+        private RegisterModel _registerModel;
+        private UserMenegment _userMenegment;
+        private LogWriter _logWriter;
         public SignInWindow()
         {
 
@@ -30,15 +31,19 @@ namespace RegistrationSystemWPF
 
         private void SignInClick(object sender, RoutedEventArgs e)
         {
-            userMenegment = new UserMenegment();
-            registerModel = new RegisterModel();
-            registerModel.Email = txtBoxEmail.Text;
-            registerModel.Password = txtBoxPassword.Text;
-            userMenegment.LoginToSystem(registerModel);
+            _userMenegment = new UserMenegment();
+            _registerModel = new RegisterModel();
+            _logWriter = new LogWriter();
+            _userMenegment.LoggedIn += _logWriter.OnLoggedIn;
+            _userMenegment.AutorizationFailed += _logWriter.OnAutorizationFailed;
 
-            if (userMenegment.IsLogined)
+            _registerModel.Email = txtBoxEmail.Text;
+            _registerModel.Password = txtBoxPassword.Text;
+            _userMenegment.LoginToSystem(_registerModel);
+
+            if (_userMenegment.IsLogined)
             {
-                var accountWindow = new AccountWindow(userMenegment.CurrentUser);
+                var accountWindow = new AccountWindow(_userMenegment.CurrentUser);
                 accountWindow.ShowDialog();
             }
         }

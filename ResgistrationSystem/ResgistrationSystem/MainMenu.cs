@@ -9,7 +9,7 @@ namespace SocialNetwork
         private int command;
         private UserMenegment userMenegment;
         private RegisterModel registerModel;
-        private LogWriter logWriter;
+        private ConsoleLogs consoleLogs;
         public void Start()
         {
             while (!stop)
@@ -23,8 +23,10 @@ namespace SocialNetwork
 
             command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
             userMenegment = new UserMenegment();
-            logWriter = new LogWriter();
-            userMenegment.LoggedIn += logWriter.OnLoggedIn;
+            consoleLogs = new ConsoleLogs();
+            userMenegment.LoggedIn += consoleLogs.OnLoggedIn;
+            userMenegment.AutorizationFailed += consoleLogs.OnAutorizationFailed;
+            userMenegment.RegisteredEmployee += consoleLogs.OnRegisteredEmployee;
             switch ((MainMenuOptions)command)
             {
                 case MainMenuOptions.Login:
