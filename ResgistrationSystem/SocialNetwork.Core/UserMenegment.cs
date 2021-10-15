@@ -11,6 +11,10 @@ using SocialNetwork.Core;
 
 namespace SocialNetwork.Core
 {
+    public class UserEventArgs : EventArgs
+    {
+        public User CurrentUser { get; set; }
+    }
     public class UserMenegment
     {
         public static List<User> Users { get; set; } = new();
@@ -47,7 +51,7 @@ namespace SocialNetwork.Core
                         sw.WriteLine(userInfo);
                         break;
                     case AccountType.Employee:
-                        Console.WriteLine("workplace ");
+                        OnRegisteredEmployee();
                         string workplace = Console.ReadLine();
                         userInfo = JsonSerializer.Serialize(new AccountModel(AccountType.Employee,
                                    JsonSerializer.Serialize(new Employee(registerModel.Name, registerModel.Surname, registerModel.Age, registerModel.Email, registerModel.Password, workplace))));
@@ -76,8 +80,9 @@ namespace SocialNetwork.Core
 
                 if (CurrentUser.Email == registerModel.Email && CurrentUser.Password == registerModel.Password)
                 {
-                    Console.WriteLine("You have successfully logged in");
+                    OnLoggedIn();
                     IsLogined = true;
+                    //OnLoggedIn(CurrentUser);
                     return;
                 }
             }
@@ -91,9 +96,28 @@ namespace SocialNetwork.Core
                            IsLogined = true;
                            return;
                        } */
-
-            Console.WriteLine("The username or password is not correct, try again");
+            OnAutorizationFailed();
         }
+
+        public event EventHandler LoggedIn;
+        public event EventHandler AutorizationFailed;
+        public event EventHandler RegisteredEmployee;
+
+        protected virtual void OnLoggedIn()
+        {
+           LoggedIn?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnAutorizationFailed()
+        {
+            AutorizationFailed?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnRegisteredEmployee()
+        {
+            RegisteredEmployee?.Invoke(this, EventArgs.Empty);
+        }
+
 
     }
 }

@@ -9,6 +9,7 @@ namespace SocialNetwork
         private int command;
         private UserMenegment userMenegment;
         private RegisterModel registerModel;
+        private ConsoleLogs consoleLogs;
         public void Start()
         {
             while (!stop)
@@ -21,7 +22,11 @@ namespace SocialNetwork
             { Environment.NewLine}{Math.Log((int)MainMenuOptions.Exit, 2)} - {MainMenuOptions.Exit}");
 
             command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
-            userMenegment = new();
+            userMenegment = new UserMenegment();
+            consoleLogs = new ConsoleLogs();
+            userMenegment.LoggedIn += consoleLogs.OnLoggedIn;
+            userMenegment.AutorizationFailed += consoleLogs.OnAutorizationFailed;
+            userMenegment.RegisteredEmployee += consoleLogs.OnRegisteredEmployee;
             switch ((MainMenuOptions)command)
             {
                 case MainMenuOptions.Login:
@@ -46,6 +51,7 @@ namespace SocialNetwork
                 registerModel.Password = Console.ReadLine();
                 userMenegment.LoginToSystem(registerModel);
             }
+
             while (ShowUserOptions(userMenegment.CurrentUser, ref stop)) { }
         }
 
