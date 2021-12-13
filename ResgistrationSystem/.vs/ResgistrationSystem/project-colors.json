@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "487c2921-2466-4f13-9cc9-13371dc31961": {
+      "ProjectGuid": "487c2921-2466-4f13-9cc9-13371dc31961",
+      "DisplayName": "SocialNetwork",
+      "ColorIndex": 0
+    },
+    "9e918ff2-1957-41bf-9c75-be376731e707": {
+      "ProjectGuid": "9e918ff2-1957-41bf-9c75-be376731e707",
+      "DisplayName": "RegistrationSystemWPF",
+      "ColorIndex": 1
+    },
+    "405a3179-1d05-4903-95f4-3bf9f4b0a8fb": {
+      "ProjectGuid": "405a3179-1d05-4903-95f4-3bf9f4b0a8fb",
+      "DisplayName": "SocialNetwork.Core",
+      "ColorIndex": 2
+    },
+    "d664284e-bb85-46fc-ae3b-8260e455b580": {
+      "ProjectGuid": "d664284e-bb85-46fc-ae3b-8260e455b580",
+      "DisplayName": "SocialNetworkXUnitTest",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork
 {
-    class ConsoleLogs
+    public class ConsoleLogs : IConsoleLogs
     {
         public void OnLoggedIn(object source, EventArgs args)
         {

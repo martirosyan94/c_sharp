@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetworkWF", "SocialNe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Core", "SocialNetwork.Core\SocialNetwork.Core.csproj", "{405A3179-1D05-4903-95F4-3BF9F4B0A8FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationSystemWPF", "RegistrationSystemWPF\RegistrationSystemWPF.csproj", "{9E918FF2-1957-41BF-9C75-BE376731E707}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistrationSystemWPF", "RegistrationSystemWPF\RegistrationSystemWPF.csproj", "{9E918FF2-1957-41BF-9C75-BE376731E707}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetworkXUnitTest", "SocialNetworkXUnitTest\SocialNetworkXUnitTest.csproj", "{D664284E-BB85-46FC-AE3B-8260E455B580}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{9E918FF2-1957-41BF-9C75-BE376731E707}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E918FF2-1957-41BF-9C75-BE376731E707}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E918FF2-1957-41BF-9C75-BE376731E707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D664284E-BB85-46FC-AE3B-8260E455B580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D664284E-BB85-46FC-AE3B-8260E455B580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D664284E-BB85-46FC-AE3B-8260E455B580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D664284E-BB85-46FC-AE3B-8260E455B580}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

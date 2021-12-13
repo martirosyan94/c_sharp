@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Core
 {
-    public record RegisterModel
+    public record RegisterModel : IRegisterModel
     {
         public string Name { get; set; }
         public string Surname { get; set; }

@@ -3,13 +3,20 @@ using System;
 
 namespace SocialNetwork
 {
-    class MainMenu : IMainMenu
+    public class MainMenu : IMainMenu
     {
         private bool stop = false;
         private int command;
-        private UserMenegment userMenegment;
-        private RegisterModel registerModel;
-        private ConsoleLogs consoleLogs;
+        private IUserMenegment _userMenegment;
+        private IRegisterModel _registerModel;
+        private IConsoleLogs _consoleLogs;
+
+        public MainMenu(IUserMenegment userMenegment, IRegisterModel registerModel, IConsoleLogs consoleLogs)
+        {
+            _userMenegment = userMenegment;
+            _registerModel = registerModel;
+            _consoleLogs = consoleLogs;
+        }
         public void Start()
         {
             while (!stop)
@@ -22,18 +29,19 @@ namespace SocialNetwork
             { Environment.NewLine}{Math.Log((int)MainMenuOptions.Exit, 2)} - {MainMenuOptions.Exit}");
 
             command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
-            userMenegment = new UserMenegment();
-            consoleLogs = new ConsoleLogs();
-            userMenegment.LoggedIn += consoleLogs.OnLoggedIn;
-            userMenegment.AutorizationFailed += consoleLogs.OnAutorizationFailed;
-            userMenegment.RegisteredEmployee += consoleLogs.OnRegisteredEmployee;
+           // _userMenegment = new UserMenegment();
+           // _consoleLogs = new ConsoleLogs();
+            _userMenegment.LoggedIn += _consoleLogs.OnLoggedIn;
+            _userMenegment.AutorizationFailed += _consoleLogs.OnAutorizationFailed;
+            _userMenegment.RegisteredEmployee += _consoleLogs.OnRegisteredEmployee;
             switch ((MainMenuOptions)command)
             {
                 case MainMenuOptions.Login:
                     SignIn();
                     break;
                 case MainMenuOptions.Register:
-                    Register();
+                    var registerType = ShowRegisterOptions();
+                    Register(registerType);
                     break;
                 case MainMenuOptions.Exit:
                     stop = true;
@@ -43,41 +51,40 @@ namespace SocialNetwork
 
         public void SignIn()
         {
-            while (!userMenegment.IsLogined)
+            while (!_userMenegment.IsLogined)
             {
-                registerModel = new RegisterModel();
+               // _registerModel = new RegisterModel();
                 Console.WriteLine("Enter your username and password");
-                registerModel.Email = Console.ReadLine();
-                registerModel.Password = Console.ReadLine();
-                userMenegment.LoginToSystem(registerModel);
+                _registerModel.Email = Console.ReadLine();
+                _registerModel.Password = Console.ReadLine();
+                _userMenegment.LoginToSystem(_registerModel);
             }
 
-            while (ShowUserOptions(userMenegment.CurrentUser, ref stop)) { }
+            while (ShowUserOptions(_userMenegment.CurrentUser, ref stop)) { }
         }
-
-        public void Register()
+        public int ShowRegisterOptions()
         {
-            registerModel = new RegisterModel();
-
             Console.WriteLine($@"{Math.Log((int)RegisterOptions.User, 2)} - {RegisterOptions.User}
             {Environment.NewLine}{Math.Log((int)RegisterOptions.Employee, 2)} - {RegisterOptions.Employee}
             {Environment.NewLine}{Math.Log((int)RegisterOptions.Student, 2)} - {RegisterOptions.Student}
             {Environment.NewLine}{Math.Log((int)RegisterOptions.Back, 2)} - {RegisterOptions.User}
             {Environment.NewLine}{Math.Log((int)RegisterOptions.Exit, 2)} - {RegisterOptions.Exit}");
 
-            command = (int)Math.Pow(2, int.Parse(Console.ReadLine()));
-            userMenegment = new();
+            return (int)Math.Pow(2, int.Parse(Console.ReadLine()));
+        }
+        public void Register(int registerType)
+        {
             RegisterInput();
-            switch ((RegisterOptions)command)
+            switch ((RegisterOptions)registerType)
             {
                 case RegisterOptions.User:
-                    registerModel.Type = AccountType.User;
-                    userMenegment.RegisterUser(registerModel);
+                    _registerModel.Type = AccountType.User;
+                    _userMenegment.RegisterUser(_registerModel);
                     Console.WriteLine("Registration sucsessfully completed");
                     break;
                 case RegisterOptions.Employee:
-                    registerModel.Type = AccountType.Employee;
-                    userMenegment.RegisterUser(registerModel);
+                    _registerModel.Type = AccountType.Employee;
+                    _userMenegment.RegisterUser(_registerModel);
                     Console.WriteLine("Registration sucsessfully completed");
                     break;
                 case RegisterOptions.Student:
@@ -93,15 +100,15 @@ namespace SocialNetwork
         public void RegisterInput()
         {
             Console.WriteLine("Name");
-            registerModel.Name = Console.ReadLine();
+            _registerModel.Name = Console.ReadLine();
             Console.WriteLine("surname");
-            registerModel.Surname = Console.ReadLine();
+            _registerModel.Surname = Console.ReadLine();
             Console.WriteLine("age");
-            registerModel.Age = int.Parse(Console.ReadLine());
+            _registerModel.Age = int.Parse(Console.ReadLine());
             Console.WriteLine("email");
-            registerModel.Email = Console.ReadLine();
+            _registerModel.Email = Console.ReadLine();
             Console.WriteLine("passwrod");
-            registerModel.Password = Console.ReadLine();
+            _registerModel.Password = Console.ReadLine();
         }
 
         public bool ShowUserOptions(User user, ref bool stop)
