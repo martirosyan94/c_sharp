@@ -9,6 +9,7 @@ namespace SocialNetwork.Core
    public interface IMainMenu
     {
         void SignIn();
-        void Register();
+        void Register(int registerType);
+        void Start();
     }
 }

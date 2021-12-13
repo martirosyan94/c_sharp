@@ -15,9 +15,8 @@ namespace SocialNetwork.Core
     {
         public User CurrentUser { get; set; }
     }
-    public class UserMenegment
+    public class UserMenegment : IUserMenegment
     {
-        public static List<User> Users { get; set; } = new();
         private int command;
         private static readonly IConfiguration _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
         private string _fileName = string.Empty;
@@ -38,7 +37,7 @@ namespace SocialNetwork.Core
         /// 1 - User, 2 - Employee, 3 - Student
         /// </summary>
         /// <param name="type"></param>
-        public void RegisterUser(RegisterModel registerModel)
+        public void RegisterUser(IRegisterModel registerModel)
         {
             using (StreamWriter sw = new(_fileName, append: true))
             {
@@ -61,7 +60,7 @@ namespace SocialNetwork.Core
             }
         }
 
-        public void LoginToSystem(RegisterModel registerModel)
+        public void LoginToSystem(IRegisterModel registerModel)
         {
             var allUsers = File.ReadAllLines(_fileName);
             AccountModel accountModel;
@@ -105,7 +104,7 @@ namespace SocialNetwork.Core
 
         protected virtual void OnLoggedIn()
         {
-           LoggedIn?.Invoke(this, EventArgs.Empty);
+            LoggedIn?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnAutorizationFailed()
